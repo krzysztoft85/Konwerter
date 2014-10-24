@@ -1,0 +1,107 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<?php 
+///Konwerter Liczb na słowa
+
+class Liczba_na_slowo{
+private    $liczby = array( 
+		
+						0=>"",
+						1=> "JEDEN",
+						2=>  "DWA ",
+						3=> "TRZY" ,
+						4=>"CZTERY",
+						5=>"PIĘŃĆ",
+						6=>"SZEJŚĆ",
+						7=>"SIEDEM",
+		 8=>"OSIEM",
+		 9=>"DZIEWIĘŃĆ",
+		 10=>"DZIESIĘŃĆ",
+		 11=>"JEDYNAŚCJE",
+		 12=>"DWANAŚCIE",
+		 13=>"TRZYNAŚCIE",
+		 14=>"CZTERNAŚCIE",
+		 15=>"PIĘNTNAŚCIE",
+		 16=>"SZESTNAŚCIE",
+		 17=>"SIEDEMNAŚCIE",
+		 18=>"OSIEMNAŚCIE",
+		 19=>"DZIEWIETNAŚCIE",
+		 20=>"DWACIEŚCIA",				
+		
+);	
+private    $dziesientne= array(
+                 0=> "",
+				 1=>"JEDYNAŚCIE",
+		         2=>"DWADZIEŚCIA",
+		         3=>"TRZYDZIESCI",		
+		         4=>"CZTERDZIEŚCI",
+				 5=>"PIĘDZIESIĄNT",
+				 6=>"SZEJŹDZIESIĄNT",
+				 7=>"SIEDEMDZIESIĄNT",
+			     8=>"OSIEMDZIESIĄNT",
+			     9=>"DZIEWIEDZIESIĄNT",
+			     10=>"",
+);
+private    $setki= array(
+		0=>"",
+		1=>"STO",
+		2=>"DWIEŚCIE",
+		3=>"TRZYSTA",
+		4=>"CZTERYSTA",
+		5=>"PIĘŃTSET",
+		6=>"SZEJŚĆSET",
+		7=>"SIEDEMSET",
+		8=>"OSIEMSET",
+		9=>"DZIEWIEŃĆSET",
+		
+);	 
+	
+	
+	
+	public function wypisz($liczba){
+	
+		return $this->dziesientne[$liczba];
+		
+	}
+	
+	public function range_1_20($liczba){
+		
+		return $this->liczby[$liczba];
+		
+	}
+			
+	public  function range_21_99($liczba){
+		$mod=$liczba%10;
+	    $dzie=$liczba/10;
+	    settype($dzie, "integer");
+		if($mod==0 && $liczba<11) return $this->dziesientne[$liczba];
+		else return $this->dziesientne[$dzie]." ".$this->liczby[$mod];
+			
+	}		
+    public  function range_100_1000($liczba){////dokonczyc
+    $mod=$liczba%100;
+    $dzie=$liczba/100;	
+    	settype($dzie, "integer");
+    	if ($mod==0) return $this->setki[$dzie];
+    	else 
+    		
+    		return $this->setki[$dzie]." ".$this->range_21_99($mod);
+    	
+}			
+		
+	
+	
+
+}
+
+
+$test = new Liczba_na_slowo();
+
+$i=100;
+while($i<1000){
+echo $test->range_100_1000($i)."<br>";
+$i++;
+}
+
+
+?>
