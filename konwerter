@@ -31,16 +31,16 @@ private    $liczby = array(
 );	
 private    $dziesientne= array(
                  0=> "",
-				 1=>"JEDYNAŚCIE",
+				 1=>"????",
 		         2=>"DWADZIEŚCIA",
-		         3=>"TRZYDZIESCI",		
+		         3=>"TRZYDZIEŚCI",		
 		         4=>"CZTERDZIEŚCI",
 				 5=>"PIĘDZIESIĄNT",
 				 6=>"SZEJŹDZIESIĄNT",
 				 7=>"SIEDEMDZIESIĄNT",
 			     8=>"OSIEMDZIESIĄNT",
 			     9=>"DZIEWIEDZIESIĄNT",
-			     10=>"",
+			     10=>"DZIEŚIĘŃĆ",
 );
 private    $setki= array(
 		0=>"",
@@ -55,14 +55,27 @@ private    $setki= array(
 		9=>"DZIEWIEŃĆSET",
 		
 );	 
+private $tysiace=array(
+					1=>"TYSIĄC",
+					2=>"TYSIĄCE",
+					3=>"TYSIĄCE",
+					4=>"TYSIĄCE",
+					5=>"TYSIĄCE",
+					6=>"TYSIĄCE",
+					7=>"TYSIĄCE",
+					8=>"TYSIĄCE",
+					9=>"TYSIĄCE",
+					10=>"TYSIĘCY",
+
+
+
+
+);
+
 	
 	
 	
-	public function wypisz($liczba){
 	
-		return $this->dziesientne[$liczba];
-		
-	}
 	
 	public function range_1_20($liczba){
 		
@@ -78,30 +91,43 @@ private    $setki= array(
 		else return $this->dziesientne[$dzie]." ".$this->liczby[$mod];
 			
 	}		
-    public  function range_100_1000($liczba){////dokonczyc
+    public  function range_100_999($liczba){
     $mod=$liczba%100;
     $dzie=$liczba/100;	
     	settype($dzie, "integer");
     	if ($mod==0) return $this->setki[$dzie];
     	else 
     		
+    		if($mod<21) { return $this->setki[$dzie]." ".$this->range_1_20($mod);}
+    	else 
     		return $this->setki[$dzie]." ".$this->range_21_99($mod);
     	
 }			
 		
+/*	public function range_1000_100k($liczba){
+		$tysiace=$liczba/1000;
+		$setki=$liczba%1000;
+		$setki=$setki*1000;
+		if($tysiace<21) return $this->range_1_20($liczba)." ".$tysiace[$liczba] ." ".
+		
+		if($setki<21) $this->range_1_20($setki);
+		elseif ($setki>20) { $this->range_21_99($setki);
+			
+		} ?????????
+		
+	}
 	
-	
-
+*/
 }
 
 
 $test = new Liczba_na_slowo();
 
-$i=100;
+/*$i=100;
 while($i<1000){
 echo $test->range_100_1000($i)."<br>";
 $i++;
 }
-
-
+*/
+$test-> range_100_999(34);
 ?>
